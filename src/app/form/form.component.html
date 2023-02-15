@@ -75,7 +75,7 @@
       <td>{{this.personService.person.IdNumber}}</td>
       <td>{{this.personService.person.DateOfBirth | date}}</td>
       <td>{{gender(this.personService.person)}}</td>
-      <td>{{this.personService.person.HMOId}}</td>
+      <td>{{hmoidFunction(this.personService.person.HMOId)}}</td>
      
     </tr>
    <tr *ngFor="let item of this.personService.children">
@@ -84,7 +84,7 @@
       <td>{{item.IdNumber}}</td> 
       <td>{{item.DateOfBirth|date}}</td>
       <td >{{gender(item)}}</td>
-      <td>{{item.HMOId}}</td>
+      <td>{{hmoidFunction(this.personService.person.HMOId)}}</td>
     </tr> 
    </table>
   </div>  

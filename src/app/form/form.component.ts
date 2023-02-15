@@ -105,5 +105,12 @@ fileName= 'ExcelSheet.xlsx';
    return "בת"
   return "בן"
  }
+ hmoidFunction(hmoid: number) {
 
+  for (let index = 0; index < this.HMOs?.length; index++) {
+    if (this.HMOs[index].idHMO == hmoid)
+      return this.HMOs[index].hmoName
+  }
+  return ""
+}
 }
