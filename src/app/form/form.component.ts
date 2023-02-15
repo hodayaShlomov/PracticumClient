@@ -69,12 +69,8 @@ fileName= 'ExcelSheet.xlsx';
   
     let element = document.getElementById('excel-table');
       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-    
-      /* generate workbook and add the worksheet */
       const wb: XLSX.WorkBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    
-    //   /* save to file */  
       XLSX.writeFile(wb, this.fileName);
  }
   showFinishMessage(errorMsg = ""){
@@ -84,8 +80,6 @@ fileName= 'ExcelSheet.xlsx';
     this.personService.children = [];
     this.personService.person = new Person("","","",new Date(),true,-1);
   }
- //var t=(this.personService.addPerson(this.personService.person).subscribe((suss)=>{console.log("הרשמת בהצלחה")},(error)=>{console.log("not good")})) 
- 
  HMOControl = new FormControl('', Validators.required);
  selectFormControl = new FormControl('', Validators.required);
  name = new FormControl('', [Validators.required]);
@@ -106,7 +100,6 @@ fileName= 'ExcelSheet.xlsx';
   return "בן"
  }
  hmoidFunction(hmoid: number) {
-
   for (let index = 0; index < this.HMOs?.length; index++) {
     if (this.HMOs[index].idHMO == hmoid)
       return this.HMOs[index].hmoName

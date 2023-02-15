@@ -31,12 +31,10 @@ export class ChildComponent implements OnInit {
     this.reset();
   }
   reset(){
-    //מאפסים
     this.personService.child = new Person("","","",new Date(),true,-1,undefined);
     this.flagErrorChild = false;
   }
   HMOControl = new FormControl('', Validators.required);
-  // selectFormControl = new FormControl('', Validators.required);
   name = new FormControl('', [Validators.required]);
   date = new FormControl('', [Validators.required]);
   idNumber = new FormControl('', [Validators.required]);
