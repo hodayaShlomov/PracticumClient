@@ -1,0 +1,15 @@
+.main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .main .mat-icon-button{
+    width: 11vw;
+  }
+
+  #name{
+    color:blue;
+  }

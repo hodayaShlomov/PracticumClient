@@ -1,0 +1,90 @@
+
+
+<form class="example-form" >
+  <div>
+    <mat-form-field class="example-full-width" >
+    <mat-label>First name</mat-label>
+    <input matInput [(ngModel)]="this.personService.person.FirstName" name="firstName" required>
+    <mat-error *ngIf="name.hasError('required')">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input  matInput [(ngModel)]="this.personService.person.LastName" name="lastName" required>    
+    <mat-error *ngIf="lastName.hasError('required')">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field  class="example-full-width" appearance="fill">
+    <mat-label>TZ</mat-label>
+    <input matInput [formControl]="idNumber" [(ngModel)]="this.personService.person.IdNumber"  required
+    minlength="9" maxlength="9" pattern="[0-9]{9}" name="IdNum">
+    <mat-error *ngIf="idNumber.hasError('required')">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="idNumber.hasError('minlength')||idNumber.hasError('maxlength')||idNumber.hasError('pattern')">you must enter 9 digits</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill"class="example-full-width"> 
+    <mat-label>Enter/Chose Date Of Birth</mat-label>
+    <input matInput [formControl]="date" [matDatepicker]="picker" [(ngModel)]="this.personService.person.DateOfBirth" name="DateOfBirth" required>
+   <mat-hint>MM/DD/YYYY</mat-hint>
+     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+     </mat-form-field>
+    <mat-error class="error" *ngIf="date.hasError('required')||this.personService.isBirthdayInvalid(this.personService.person.DateOfBirth)==true">{{getErrorMessage()}}</mat-error>
+   <br>  
+   <p class="example-full-width">Chose Gender</p>
+  <mat-form-field appearance="fill"  class="example-full-width">
+    <mat-label>Select an option</mat-label>
+    <mat-select  [(value)]="selected" [(ngModel)]="this.personService.person.IsMale" name="IsMale" >
+      <mat-option [value]="true"> Male</mat-option>
+      <mat-option [value]="false"> Female</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>HMO</mat-label>
+    <mat-select [formControl]="MoF" [(ngModel)]="personService.person.HMOId" name="hmoid" required="">
+      <mat-option *ngFor="let type of HMOs" [value]="type.idHMO">
+        {{type.hmoName}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="HMOControl.hasError('required')">Please choose a HMO</mat-error>
+  </mat-form-field> 
+
+</div>
+
+ <button mat-button color="accent" (click)="this.personService.showChild=!this.personService.showChild" >+ Add Child</button>
+  <div class="child" *ngIf="this.personService.showChild==true">
+  <app-child></app-child>
+</div>
+<div class="bottom">
+  <button mat-raised-button color="accent" (click)="saveUser()">SAVE All</button>
+</div>
+</form>
+
+<div style=" display: none;">
+  <table id="excel-table">
+    <tr>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>IdNumber</th>
+      <th>DateOfBirth</th>
+      <th>Gader</th>
+      <th>HMO</th>
+    </tr>
+    <tr>
+      <td>{{this.personService.person.FirstName}}</td>
+      <td>{{this.personService.person.LastName}}</td>
+      <td>{{this.personService.person.IdNumber}}</td>
+      <td>{{this.personService.person.DateOfBirth | date}}</td>
+      <td>{{gender(this.personService.person)}}</td>
+      <td>{{this.personService.person.HMOId}}</td>
+     
+    </tr>
+   <tr *ngFor="let item of this.personService.children">
+      <td>{{item.FirstName}}</td>
+      <td>{{item.LastName}}</td> 
+      <td>{{item.IdNumber}}</td> 
+      <td>{{item.DateOfBirth|date}}</td>
+      <td >{{gender(item)}}</td>
+      <td>{{item.HMOId}}</td>
+    </tr> 
+   </table>
+  </div>  

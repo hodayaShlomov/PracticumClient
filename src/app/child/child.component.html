@@ -1,0 +1,32 @@
+<form class="example-form" >
+  <mat-form-field class="example-full-width">
+    <mat-label>First name</mat-label>
+    <input matInput [(ngModel)]="this.personService.child.FirstName" name="firstName" required>
+    <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field  class="example-full-width" appearance="fill">
+    <mat-label>TZ</mat-label>
+    <input matInput [formControl]="idNumber" [(ngModel)]="this.personService.child.IdNumber"  required
+    minlength="9" maxlength="9" pattern="[0-9]{9}" name="IdNum">
+    <mat-error *ngIf="idNumber.hasError('required')">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="idNumber.hasError('minlength')||idNumber.hasError('maxlength')||idNumber.hasError('pattern')">you must enter 9 digits</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill"class="example-full-width">
+    <mat-label>Enter/Chose Date Of Birth</mat-label>
+    <input matInput [formControl]="date" [matDatepicker]="picker" [(ngModel)]="this.personService.child.DateOfBirth" name="DateOfBirth" required>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+     </mat-form-field>
+    <mat-error class="error" *ngIf="date.hasError('required')||this.personService.isBirthdayInvalid(this.personService.child.DateOfBirth)==true">{{getErrorMessage()}}</mat-error>
+     <br>  
+     <p class="example-full-width">Chose Gender</p>
+     <mat-form-field appearance="fill"  class="example-full-width">
+       <mat-label>Select an option</mat-label>
+       <mat-select  [(value)]="selected" [(ngModel)]="this.personService.child.IsMale" name="IsMale" >
+         <mat-option [value]="true"> Male</mat-option>
+         <mat-option [value]="false"> Female</mat-option>
+       </mat-select>
+     </mat-form-field> <br>  
+     <button mat-button color="accent" (click)="saveChild()">SAVE CHILD</button>
+</form>
